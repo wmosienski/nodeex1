@@ -34,7 +34,7 @@ const userLogin = async (login, password) => {
 const findUserById = async (userId) => {
     const user = await getUserById(userId);
     if (!user) {
-        return null;
+        throw 'user not found';
     }
     return getUserInfo(user);
 }

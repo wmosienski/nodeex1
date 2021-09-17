@@ -15,21 +15,27 @@ const registerRequest = (req, res, next) => {
 const loginRequest = (req, res, next) => {
     const { login, password } = req.body;
     userLogin(login, password)
-        .then(({user, token}) => res.json({
-            message: 'login succesfull',
-            user,
-            token,
-        }))
+        .then(({user, token}) => user ? 
+            res.json({
+                message: 'login succesfull',
+                user,
+                token,
+            }) : 
+            res.sendStatus(422)
+        )
         .catch(next)
 }
 
 const findUserByIdRequest = (req, res, next) => {
     const { id } = req.params;
     findUserById(id)
-        .then(user => res.json({
-            message: user ? 'user found succesfully' : 'no user found for provided id',
-            user,
-        }))
+        .then(user => user ? 
+            res.json({
+                message: 'user found succesfully',
+                user,
+            }) :
+            res.sendStatus(404)
+        )
         .catch(next)
 }
 
