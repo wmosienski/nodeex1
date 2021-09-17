@@ -1,5 +1,5 @@
 const express = require('express');
-const { userRouter } = require('../router/userRouter');
+const { userRouter } = require('./router/userRouter');
 const { mysqlConnect } = require('../db/mysql/db');
 const app = express()
 const port = 3000
