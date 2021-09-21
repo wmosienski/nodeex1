@@ -1,6 +1,6 @@
-const { validate, ValidationError, Joi } = require('express-validation')
+const { Joi } = require('express-validation')
 
-const loginSchema = {
+const loginPasswordSchema = {
     body: Joi.object({
         login: Joi.string()
             .regex(/[a-zA-Z0-9]{3,30}/)
@@ -11,7 +11,14 @@ const loginSchema = {
     })
 }
 
+const byUserIdSchema = {
+    params: Joi.object({
+        id: Joi.number().required()
+    })
+}
+
 
 module.exports = {
-    loginSchema
+    loginPasswordSchema,
+    byUserIdSchema
 }
