@@ -2,7 +2,7 @@ const {
     register,
     userLogin,
     findUserById,
-} = require('../service/userService');
+} = require('../../service/userService');
 
 
 const registerRequest = (req, res, next) => {
@@ -15,21 +15,24 @@ const registerRequest = (req, res, next) => {
 const loginRequest = (req, res, next) => {
     const { login, password } = req.body;
     userLogin(login, password)
-        .then(({user, token}) => res.json({
-            message: 'login succesfull',
-            user,
-            token,
-        }))
+        .then(token => token ? 
+            res.json(token) : 
+            res.json({
+                error: true, 
+                code: 422, 
+                message: 'Incorrect login or password'
+            })
+        )
         .catch(next)
 }
 
 const findUserByIdRequest = (req, res, next) => {
     const { id } = req.params;
     findUserById(id)
-        .then(user => res.json({
-            message: user ? 'user found succesfully' : 'no user found for provided id',
-            user,
-        }))
+        .then(user => user ? 
+            res.json(user) :
+            res.sendStatus(404)
+        )
         .catch(next)
 }
 

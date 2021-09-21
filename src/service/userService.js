@@ -14,27 +14,24 @@ const register = async (login, password) => {
 const userLogin = async (login, password) => {
     const user = await getUserByLogin(login);
     if (!user) {
-        throw 'incorrect login';
+        return false;
     }
     const providedHashedPassword = generateToken(password);
     if (user.password === providedHashedPassword) {
         const token = generateTimeLimitedToken({
-            login: user.login,
+            id: user.id,
             timestamp: Date.now()
         });
         // TODO start session using token (redis)
-        return {
-            user: await getUserInfo(user),
-            token
-        }
+        return token
     }
-    throw 'incorrect password';
+    
 }
 
 const findUserById = async (userId) => {
     const user = await getUserById(userId);
     if (!user) {
-        return null;
+        throw 'user not found';
     }
     return getUserInfo(user);
 }
