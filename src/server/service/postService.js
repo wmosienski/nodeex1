@@ -5,8 +5,8 @@ const addPostService = (userId, content) => {
     return addPost(userId, content);
 }
 
-const addCommentService = (userId, path, content) => {
-    return addComment(userId, path, content);
+const addCommentService = (userId, opId, path, content) => {
+    return addComment(userId, opId, path, content);
 }
 
 const getPostsByUserIdService = userId => {

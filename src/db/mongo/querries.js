@@ -12,10 +12,10 @@ const addPost = async (userId, content) => {
     return newPost.save();
 }
 
-const addComment = async (userId, path, content) => {
+const addComment = async (userId, opId, path, content) => {
     const myPath = path.map(el => `${el}.children`).join('.')
     return Post.updateMany(
-        { _id: mongoose.Types.ObjectId("614c47eea292e1d6234147a8") },
+        { _id: mongoose.Types.ObjectId(opId) },
         { $push: { [`children.${myPath}`]: new Post({userId, content, children: []} ) } }
     )
 }

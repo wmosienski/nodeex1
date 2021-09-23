@@ -9,8 +9,8 @@ const addPostRequest = (req, res, next) => {
 }
 
 const addCommentRequest = (req, res, next) => {
-    const {userId, path, content} = req.body;
-    addCommentService(userId, path, content)
+    const {userId, opId, path, content} = req.body;
+    addCommentService(userId, opId, path, content)
         .then(result => result ? 
             res.json({message: 'comment added succesfully'}) :
             res.json({

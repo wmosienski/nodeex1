@@ -15,6 +15,8 @@ const newCommentSchema = {
     body: Joi.object({
         userId: Joi.number()
             .required(),
+        opId: Joi.objectId()
+            .required(),
         path: Joi.array()
             .required(),
         content: Joi.string()
