@@ -1,14 +1,14 @@
 const express = require('express');
+const { validate } = require('express-validation');
+const { addPostRequest, getPostsByUserIdRequest, addCommentRequest } = require('../controller/postController');
+const { newPostSchema, newCommentSchema } = require('../validation/postValidation');
+const { byIdSchema } = require('../validation/userValidation');
 const router = express.Router();
 
-const { 
-    //findPostsByTitleRequest,
-    //findUserPostsByUserIdRequest,
- } = require("../controller/postsController");
+
+router.post('/add', validate(newPostSchema), addPostRequest);
+router.post('/comment', validate(newCommentSchema), addCommentRequest);
+router.get('/posts/:id', validate(byIdSchema), getPostsByUserIdRequest);
 
 
-//router.get('/posts-by-title', findPostsByTitleRequest);
-//router.get('/user-posts/:userId', findUserPostsByUserIdRequest);
-
-
-module.exports = { postsRouter: router }
+module.exports = { postRouter: router }

@@ -1,5 +1,5 @@
-const { addUser, getUserByLogin, getUserById } = require("../db/mysql/querries")
-const { generateToken, generateTimeLimitedToken } = require("../utils/crypt")
+const { addUser, getUserByLogin, getUserById } = require("../../db/mysql/querries")
+const { generateToken, generateTimeLimitedToken } = require("../../utils/crypt")
 
 const getUserInfo = async user => {
     user.password = undefined;
@@ -8,7 +8,7 @@ const getUserInfo = async user => {
 }
 
 const register = async (login, password) => {
-    addUser(login, generateToken(password));
+    return addUser(login, generateToken(password));
 }
 
 const userLogin = async (login, password) => {

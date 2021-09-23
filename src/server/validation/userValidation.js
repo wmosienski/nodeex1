@@ -11,7 +11,7 @@ const loginPasswordSchema = {
     })
 }
 
-const byUserIdSchema = {
+const byIdSchema = {
     params: Joi.object({
         id: Joi.number().required()
     })
@@ -20,5 +20,5 @@ const byUserIdSchema = {
 
 module.exports = {
     loginPasswordSchema,
-    byUserIdSchema
+    byIdSchema
 }

@@ -2,7 +2,7 @@ const {
     register,
     userLogin,
     findUserById,
-} = require('../../service/userService');
+} = require('../service/userService');
 
 
 const registerRequest = (req, res, next) => {

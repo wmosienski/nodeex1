@@ -1,10 +1,12 @@
 const jwt = require('jsonwebtoken')
-const config = require("./config");
+const { getConfig } = require('./config');
 
+
+const config = getConfig();
 
 const generateToken = payload => jwt.sign(
-    payload,
-    config.API_SECRET,
+  payload,
+  config.API_SECRET,
 );
 
 const generateTimeLimitedToken = payload => jwt.sign(

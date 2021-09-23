@@ -1,6 +1,5 @@
 const { mysqlConnect } = require('./db')
-const { dropCreateDb } = require('./querries')
+const { dropCreateMysqlDb } = require('./querries')
 
-mysqlConnect(() => {
-    dropCreateDb()
-})
+mysqlConnect()
+    .then(() => dropCreateMysqlDb())

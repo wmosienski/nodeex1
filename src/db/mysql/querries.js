@@ -1,9 +1,9 @@
-const { mysqldb } = require('./db')
+const { getMysqlDb } = require('./db')
 
 
 const all = async query => {
     return new Promise((resolve, reject) =>
-        mysqldb.query(query, (error, results, fields) => {
+        getMysqlDb().query(query, (error, results, fields) => {
             if (!error) {
                 resolve(results)
             } else {
@@ -19,9 +19,9 @@ const first = async query => {
 }
 
 
-const dropCreateDb = () => {
-    all('DROP TABLE users;');
-    all('CREATE TABLE users (id int NOT NULL AUTO_INCREMENT, login varchar(255) NOT NULL, password varchar(255) NOT NULL, PRIMARY KEY (id));')
+const dropCreateMysqlDb = async () => {
+    return all('DROP TABLE users;')
+        .then(() => all('CREATE TABLE users (id int NOT NULL AUTO_INCREMENT, login varchar(255) NOT NULL UNIQUE, password varchar(255) NOT NULL, PRIMARY KEY (id));'));
 }
 
 const addUser = async (login, hashedPassword) => {
@@ -33,13 +33,12 @@ const getUserById = async (userId) => {
 }
 
 const getUserByLogin = async (login) => {
-    console.log(login)
     return first(`SELECT * FROM users WHERE login = '${login}'`);
 }
 
 
 module.exports = {
-    dropCreateDb,
+    dropCreateMysqlDb,
     addUser,
     getUserById,
     getUserByLogin

@@ -2,18 +2,30 @@
   "name": "dummy",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server/main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "start:dev": "node -r dotenv/config src/server/main.js dotenv_config_path=.env"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "deepmerge": "^4.2.2",
+    "dotenv": "^10.0.0",
     "express": "^4.17.1",
     "express-validation": "^3.0.8",
+    "joi-objectid": "^4.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^6.0.5",
     "mysql": "^2.18.1",
     "redis": "^3.1.2"
+  },
+  "devDependencies": {
+    "jest": "^27.2.1"
+  },
+  "jest": {
+    "setupFiles": [
+      "./test/setupTests.js"
+    ]
   }
 }
